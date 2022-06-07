@@ -7,11 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HelloXXX extends AppCompatActivity {
 
     TextView hello_user;
-    Button change_password;
+    Button change_password,logout;
+    FirebaseAuth mAuth;
 
 
     @Override
@@ -21,6 +25,9 @@ public class HelloXXX extends AppCompatActivity {
 
         hello_user = findViewById(R.id.hello_tv);
         change_password = findViewById(R.id.changepassword);
+        logout = findViewById(R.id.logout);
+
+        mAuth = FirebaseAuth.getInstance();
 
         Bundle bundle = getIntent().getExtras();
         String username = bundle.getString("username");
@@ -36,6 +43,17 @@ public class HelloXXX extends AppCompatActivity {
                 intent.setClass(HelloXXX.this, ChangePassword.class);
                 intent.putExtra("email", email);
                 intent.putExtra("password", password);
+                startActivity(intent);
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Toast.makeText(HelloXXX.this, "LOG OUT ...", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setClass(HelloXXX.this, MainActivity.class);
                 startActivity(intent);
             }
         });
