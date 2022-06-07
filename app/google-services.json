@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1041881174382",
+    "project_id": "wanin-c896a",
+    "storage_bucket": "wanin-c896a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041881174382:android:a76f50ba208ed0d2e2f17f",
+        "android_client_info": {
+          "package_name": "com.example.wanininterviewassignment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1041881174382-vgad8oqub9qi7ftbg56j06shmkelgpfh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKI2_xSKhVCGmw2bIYLg3j1laK11AfxfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1041881174382-vgad8oqub9qi7ftbg56j06shmkelgpfh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
