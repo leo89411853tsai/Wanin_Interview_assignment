@@ -34,19 +34,24 @@ class ChangePassword : AppCompatActivity() {
         val password = bundle?.getString("password")
 
         submit?.setOnClickListener(View.OnClickListener {
-            if (new_password?.text.toString() == type_again?.text.toString()) {
-                val user = mAuth.currentUser
-                val authCredential = EmailAuthProvider.getCredential(user?.email.toString(), password.toString())
-                user?.reauthenticate(authCredential)?.addOnSuccessListener {
-                    user?.updatePassword(new_password?.text.toString())?.addOnSuccessListener {
-                        Toast.makeText(this@ChangePassword, "Password Updated...", Toast.LENGTH_SHORT).show()
-                        val intent = Intent()
-                        intent.setClass(this@ChangePassword, MainActivity::class.java)
-                        startActivity(intent)
-                    }?.addOnFailureListener { e -> Toast.makeText(this@ChangePassword, e.message, Toast.LENGTH_SHORT).show() }
+            if(new_password?.text.toString() != "" && type_again?.text.toString() != ""){
+                if (new_password?.text.toString() == type_again?.text.toString()) {
+                    val user = mAuth.currentUser
+                    val authCredential = EmailAuthProvider.getCredential(user?.email.toString(), password.toString())
+                    user?.reauthenticate(authCredential)?.addOnSuccessListener {
+                        user?.updatePassword(new_password?.text.toString())?.addOnSuccessListener {
+                            Toast.makeText(this@ChangePassword, "Password Updated...", Toast.LENGTH_SHORT).show()
+                            val intent = Intent()
+                            intent.setClass(this@ChangePassword, MainActivity::class.java)
+                            startActivity(intent)
+                        }?.addOnFailureListener { e -> Toast.makeText(this@ChangePassword, e.message, Toast.LENGTH_SHORT).show() }
+                    }
+                } else {
+                    Toast.makeText(this@ChangePassword, "Input Error...", Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                Toast.makeText(this@ChangePassword, "Input Error...", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(this@ChangePassword, "Please enter your password...", Toast.LENGTH_SHORT).show()
             }
         })
     }
