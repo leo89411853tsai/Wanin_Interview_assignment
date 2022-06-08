@@ -29,22 +29,36 @@ class MainActivity : AppCompatActivity() {
         signup_b = findViewById(R.id.SIGNUP_B)
         mAuth = FirebaseAuth.getInstance()
 
-        signup_b?.setOnClickListener(View.OnClickListener { mAuth.createUserWithEmailAndPassword(login?.text.toString(), password?.text.toString()) })
+        signup_b?.setOnClickListener(View.OnClickListener {
+            if(login?.text.toString() != "" && password?.text.toString() != ""){
+                mAuth.createUserWithEmailAndPassword(login?.text.toString(), password?.text.toString())
+            }
+            else{
+                Toast.makeText(this@MainActivity, "Please enter your account and password...", Toast.LENGTH_SHORT).show()
+            }
+        })
+
         login_b?.setOnClickListener(View.OnClickListener {
-            mAuth.signInWithEmailAndPassword(login?.text.toString(), password?.text.toString()).addOnCompleteListener(context) { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(this@MainActivity, "Successful...", Toast.LENGTH_SHORT).show()
-                    val user = mAuth.currentUser
-                    email = user?.email.toString()
-                    user_name = email.split("@").toTypedArray()
-                    val intent = Intent()
-                    intent.setClass(this@MainActivity, HelloXXX::class.java)
-                    intent.putExtra("username", user_name[0])
-                    intent.putExtra("email", email)
-                    intent.putExtra("password", password?.getText().toString())
-                    startActivity(intent)
-                }
-            }.addOnFailureListener { e -> Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_SHORT).show() }
+            if(login?.text.toString() != "" && password?.text.toString() != ""){
+                mAuth.signInWithEmailAndPassword(login?.text.toString(), password?.text.toString()).addOnCompleteListener(context) { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(this@MainActivity, "Successful...", Toast.LENGTH_SHORT).show()
+                        val user = mAuth.currentUser
+                        email = user?.email.toString()
+                        user_name = email.split("@").toTypedArray()
+                        val intent = Intent()
+                        intent.setClass(this@MainActivity, HelloXXX::class.java)
+                        intent.putExtra("username", user_name[0])
+                        intent.putExtra("email", email)
+                        intent.putExtra("password", password?.getText().toString())
+                        startActivity(intent)
+                    }
+                }.addOnFailureListener { e -> Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_SHORT).show() }
+            }
+            else{
+                Toast.makeText(this@MainActivity, "Please enter your account and password...", Toast.LENGTH_SHORT).show()
+            }
+
         })
     }
 }
